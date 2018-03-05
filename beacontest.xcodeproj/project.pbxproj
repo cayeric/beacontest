@@ -16,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA540A97204D70EB00C7BB17 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CAD3906420430E99007C269B /* beacontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beacontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD3906720430E99007C269B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CAD3906820430E99007C269B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 		CAD3905B20430E99007C269B = {
 			isa = PBXGroup;
 			children = (
+				CA540A97204D70EB00C7BB17 /* README.md */,
 				CAD3906620430E99007C269B /* beacontest */,
 				CAD3906520430E99007C269B /* Products */,
 			);
