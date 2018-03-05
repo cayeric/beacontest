@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+// for custom beacon advertising
+#import <CoreBluetooth/CoreBluetooth.h>
+
+// for iBeacon advertising only
+#import <CoreLocation/CoreLocation.h>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CBPeripheralManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

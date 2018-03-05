@@ -13,10 +13,16 @@
 @end
 
 @implementation AppDelegate
-
+{
+    CBPeripheralManager * _peripheralManager;
+  
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // Override point for customization after application 
+    _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+
+    
     return YES;
 }
 
@@ -45,6 +51,34 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - CBPeripheralManagerDelegate
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    if (peripheral.state == CBManagerStatePoweredOn) 
+    {
+        NSLog(@"-- peripheral state changed: powered on");
+        
+        // comment out for custom beacon - no iBeacon compatible
+//        NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"BLE Beacon Test", 
+//                                          CBAdvertisementDataServiceUUIDsKey:@[[CBUUID UUIDWithString:@"123F0000-503E-4C75-BA94-3148F18D941E"]]};
+        
+        // comment out for iBeacon compatible - no background transmitting
+        NSUUID * proximityID = [[NSUUID alloc]  initWithUUIDString:@"713D0000-503E-4C75-BA94-3148F18D941E"]; 
+        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityID major:1 minor:2 identifier:@"myBeacon"];
+        NSDictionary * advertisingData = [beaconRegion peripheralDataWithMeasuredPower:nil];
+
+        [_peripheralManager startAdvertising:advertisingData];
+    }
+}
+
+- (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
+{
+    if (error)
+        NSLog(@"error starting advertising: %@", [error localizedDescription]);
+    else
+        NSLog(@"did start advertising");
 }
 
 
